@@ -1,11 +1,15 @@
-var http = require("http");
-//var fs = require("fs");
+var server = require("./start");
+server.start();
 
+/*
+var http = require("http");
+// use port 1337 unless there exists a preconfigured port
+var port = process.env.port || 1337;
+// express way ****************
 var express = require("express");
 var path = require("path");
 
-// use port 1337 unless there exists a preconfigured port
-var port = process.env.port || 1337;
+
 
 var app = express();
 app.get("/", function (req, res) {
@@ -15,7 +19,8 @@ app.get("/", function (req, res) {
 app.listen(port);
 console.log("Request with Express on Post " + port);
 
-/*
+// no express way ****************
+var fs = require("fs");
 
 http
   .createServer(function (req, res) {
