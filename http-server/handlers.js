@@ -1,13 +1,13 @@
 function home() {
-  console.log("Request 'home' called.");
+  return "Request 'home' called.";
 }
 
 function show() {
-  console.log("Request 'show' called.");
+  return "Request 'show' called.";
 }
 
 function upload() {
-  console.log("Request 'upload' called.");
+  return "Request 'upload' called.";
 }
 
 exports.home = home;

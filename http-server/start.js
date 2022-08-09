@@ -2,15 +2,14 @@ var http = require("http");
 var url = require("url");
 
 function start(route, handler) {
-  //console.log("Starting.");
-
   function onRequest(req, res) {
     var pathname = url.parse(req.url).pathname;
-    if (route(pathname, handler)) {
+    var content = route(pathname, handler);
+    if (content) {
       res.writeHead(200, {
         "Content-Type": "text/plain",
       });
-      res.write("Hello router");
+      res.write(content);
       res.end();
     } else {
       res.writeHead(404, {
