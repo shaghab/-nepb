@@ -1,8 +1,21 @@
 var http = require("http");
-var fs = require("fs");
+//var fs = require("fs");
+
+var express = require("express");
+var path = require("path");
 
 // use port 1337 unless there exists a preconfigured port
 var port = process.env.port || 1337;
+
+var app = express();
+app.get("/", function (req, res) {
+  res.sendFile(path.join(__dirname + "/index.html"));
+});
+
+app.listen(port);
+console.log("Request with Express on Post " + port);
+
+/*
 
 http
   .createServer(function (req, res) {
@@ -15,3 +28,4 @@ http
     read.pipe(res);
   })
   .listen(port);
+*/
