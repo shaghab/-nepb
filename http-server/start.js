@@ -1,12 +1,12 @@
 var http = require("http");
 var url = require("url");
 
-function start() {
+function start(router) {
   console.log("Starting.");
 
   function onRequest(req, res) {
     var pathname = url.parse(req.url).pathname;
-    console.log(`Request for path ${pathname} receivied.`);
+    router.route(pathname);
     res.writeHead(200, {
       "Content-Type": "text/html",
     });
