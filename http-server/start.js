@@ -4,14 +4,8 @@ var url = require("url");
 function start(route, handler) {
   function onRequest(req, res) {
     var pathname = url.parse(req.url).pathname;
-    var content = route(pathname, handler);
-    if (content) {
-      res.writeHead(200, {
-        "Content-Type": "text/plain",
-      });
-      res.write(content);
-      res.end();
-    } else {
+    var content = route(pathname, handler, res);
+    if (!content) {
       res.writeHead(404, {
         "Content-Type": "text/plain",
       });
