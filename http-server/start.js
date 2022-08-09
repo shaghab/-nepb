@@ -1,17 +1,24 @@
 var http = require("http");
 var url = require("url");
 
-function start(router) {
-  console.log("Starting.");
+function start(router, handler) {
+  //console.log("Starting.");
 
   function onRequest(req, res) {
     var pathname = url.parse(req.url).pathname;
-    router.route(pathname);
-    res.writeHead(200, {
-      "Content-Type": "text/html",
-    });
-    res.write("The first server");
-    res.end();
+    if (router.route(pathname, handler)) {
+      res.writeHead(200, {
+        "Content-Type": "text/plain",
+      });
+      res.write("Hello router");
+      res.end();
+    } else {
+      res.writeHead(404, {
+        "Content-Type": "text/plain",
+      });
+      res.write("404 not found");
+      res.end();
+    }
   }
   // use port 1337 unless there exists a preconfigured port
   var port = process.env.port || 1337;
