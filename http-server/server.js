@@ -7,4 +7,4 @@ handler["/"] = requestHandlers.home;
 handler["/show"] = requestHandlers.show;
 handler["/upload"] = requestHandlers.upload;
 
-server.start(router, handler);
+server.start(router.route, handler);
