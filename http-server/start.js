@@ -9,7 +9,6 @@ function start() {
     console.log(`Request for path ${pathname} receivied.`);
     res.writeHead(200, {
       "Content-Type": "text/html",
-      "Access-Control-Allow-Origin": "*", // allow requesting code from any origin to access the resource
     });
     res.write("The first server");
     res.end();
