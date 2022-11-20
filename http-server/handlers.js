@@ -6,9 +6,7 @@ function home(request, response) {
     response.end();
   }
   fs.readFile("views/home.html", function (err, data) {
-    response.writeHead(200, {
-      "Content-Type": "text/html",
-    });
+    response.writeHead(200, { "Content-Type": "text/html" });
     response.write(data);
     response.end();
   });
@@ -46,9 +44,7 @@ function upload(request, response) {
     response.writeHead("405");
     response.end();
   }
-  response.writeHead(200, {
-    "Content-Type": "text/plain",
-  });
+  response.writeHead(200, { "Content-Type": "text/plain" });
   response.write("Request 'upload' called.");
   response.end();
   return true;

@@ -6,9 +6,7 @@ function start(route, handler) {
     var pathname = url.parse(req.url).pathname;
     var content = route(pathname, handler, req, res);
     if (!content) {
-      res.writeHead(404, {
-        "Content-Type": "text/plain",
-      });
+      res.writeHead(404, { "Content-Type": "text/plain" });
       res.write("404 not found");
       res.end();
     }
