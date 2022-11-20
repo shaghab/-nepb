@@ -1,7 +1,7 @@
 var fs = require("fs");
 
 function home(response) {
-  fs.readFile("./index.html", function (err, data) {
+  fs.readFile("views/home.html", function (err, data) {
     response.writeHead(200, {
       "Content-Type": "text/html",
     });
@@ -13,20 +13,30 @@ function home(response) {
 }
 
 function show(response) {
-  response.writeHead(200, {
-    "Content-Type": "text/plain",
+  fs.readdir("files", function (err, list) {
+    response.writeHead(200, {
+      "Content-Type": "text/html",
+    });
+    var html = "<html><head></head>" + "<body><h1>File Manager</h1>";
+    if (list.length) {
+      html += "<ul>";
+      for (i = 0; i < list.length; i++) {
+        html +=
+          '<li><a href="/show?fn=' + list[i] + '">' + list[i] + "</a></li>";
+      }
+      html += "</ul>";
+    } else {
+      html += "<h2>No files found</h2";
+    }
+    html += "</body></html>";
+    response.write(html);
+    response.end();
   });
-  response.write("Request 'show' called.");
-  response.end();
   return true;
 }
 
 function upload(response) {
-  response.writeHead(200, {
-    "Content-Type": "text/plain",
-  });
   response.write("Request 'upload' called.");
-  response.end();
   return true;
 }
 
