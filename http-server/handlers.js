@@ -14,9 +14,7 @@ function home(response) {
 
 function show(response) {
   fs.readdir("files", function (err, list) {
-    response.writeHead(200, {
-      "Content-Type": "text/html",
-    });
+    response.writeHead(200, { "Content-Type": "text/html" });
     var html = "<html><head></head>" + "<body><h1>File Manager</h1>";
     if (list.length) {
       html += "<ul>";
