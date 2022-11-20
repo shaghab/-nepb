@@ -1,6 +1,10 @@
 var fs = require("fs");
 
-function home(response) {
+function home(request, response) {
+  if (request.method !== "GET") {
+    response.writeHead("405");
+    response.end();
+  }
   fs.readFile("views/home.html", function (err, data) {
     response.writeHead(200, {
       "Content-Type": "text/html",
@@ -12,7 +16,11 @@ function home(response) {
   return true;
 }
 
-function show(response) {
+function show(request, response) {
+  if (request.method !== "GET") {
+    response.writeHead("405");
+    response.end();
+  }
   fs.readdir("files", function (err, list) {
     response.writeHead(200, { "Content-Type": "text/html" });
     var html = "<html><head></head>" + "<body><h1>File Manager</h1>";
@@ -33,7 +41,11 @@ function show(response) {
   return true;
 }
 
-function upload(response) {
+function upload(request, response) {
+  if (request.method !== "GET") {
+    response.writeHead("405");
+    response.end();
+  }
   response.writeHead(200, {
     "Content-Type": "text/plain",
   });
