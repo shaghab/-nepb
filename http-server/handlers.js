@@ -34,7 +34,11 @@ function show(response) {
 }
 
 function upload(response) {
+  response.writeHead(200, {
+    "Content-Type": "text/plain",
+  });
   response.write("Request 'upload' called.");
+  response.end();
   return true;
 }
 
