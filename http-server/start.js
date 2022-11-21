@@ -15,10 +15,8 @@ function start(route, handler) {
         content = route(pathname, handler, request, response, postData);
       });
     } else {
-      //content = route(pathname, handler, response);
+      content = route(pathname, handler, request, response);
     }
-
-    var content = route(pathname, handler, request, response);
 
     if (!content) {
       response.writeHead(404, { "Content-Type": "text/plain" });
