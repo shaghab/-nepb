@@ -1,10 +1,6 @@
 var fs = require("fs");
 
 function home(request, response) {
-  if (request.method !== "GET") {
-    response.writeHead("405");
-    response.end();
-  }
   fs.readFile("views/home.html", function (err, data) {
     response.writeHead(200, { "Content-Type": "text/html" });
     response.write(data);
@@ -15,10 +11,6 @@ function home(request, response) {
 }
 
 function show(request, response) {
-  if (request.method !== "GET") {
-    response.writeHead("405");
-    response.end();
-  }
   fs.readdir("files", function (err, list) {
     response.writeHead(200, { "Content-Type": "text/html" });
     var html = "<html><head></head>" + "<body><h1>File Manager</h1>";
@@ -40,10 +32,6 @@ function show(request, response) {
 }
 
 function upload(request, response) {
-  if (request.method !== "GET") {
-    response.writeHead("405");
-    response.end();
-  }
   response.writeHead(200, { "Content-Type": "text/plain" });
   response.write("Request 'upload' called.");
   response.end();
