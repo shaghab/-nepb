@@ -1,6 +1,6 @@
 var fs = require("fs");
 
-function home(response) {
+function home(response, data) {
   fs.readFile("views/home.html", function (err, data) {
     response.writeHead(200, { "Content-Type": "text/html" });
     response.write(data);
@@ -10,7 +10,7 @@ function home(response) {
   return true;
 }
 
-function show(response) {
+function show(response, data) {
   fs.readdir("files", function (err, list) {
     response.writeHead(200, { "Content-Type": "text/html" });
     var html = "<html><head></head>" + "<body><h1>File Manager</h1>";
@@ -31,7 +31,7 @@ function show(response) {
   return true;
 }
 
-function upload(response) {
+function upload(response, data) {
   response.writeHead(200, { "Content-Type": "text/plain" });
   response.write("Request 'upload' called.");
   response.end();
