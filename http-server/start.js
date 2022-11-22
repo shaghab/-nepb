@@ -1,27 +1,37 @@
 var http = require("http");
 var url = require("url");
+var formidable = require("formidable");
+var querystring = require("querystring");
 
 function start(route, handler) {
+  function execute(pathname, handler, request, response, data) {
+    var content = route(pathname, handler, request, response, data);
+    if (!content) {
+      response.writeHead(400, { "Content-Type": "text/plain" });
+      response.write("400 Bad request");
+      response.end();
+    }
+  }
+
   function onRequest(request, response) {
     var pathname = url.parse(request.url).pathname;
-    var content;
-    var postData = "";
-    request.setEncoding("utf8");
+    var query = url.parse(request.url).query;
     if (request.method === "POST") {
-      request.addListener("data", function (chunk) {
-        postData += chunk;
+      var form = new formidable.IncomingForm();
+      form.parse(request, function (err, fields, files) {
+        if (err) {
+          console.error(err.message);
+          return;
+        }
+        var data = { fields: fields, files: files };
+        execute(pathname, handler, request, response, data);
       });
-      request.addListener("end", function () {
-        content = route(pathname, handler, request, response, postData);
-      });
-    } else {
-      content = route(pathname, handler, request, response);
     }
-
-    if (!content) {
-      response.writeHead(404, { "Content-Type": "text/plain" });
-      response.write("404 not found");
-      response.end();
+    if (request.method === "GET") {
+      var data = {
+        fields: querystring.parse(query),
+      };
+      execute(pathname, handler, request, response, data);
     }
   }
   // use port 1337 unless there exists a preconfigured port
