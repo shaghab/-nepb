@@ -34,7 +34,7 @@ function show(response, data) {
       }
       html += "</ul>";
     } else {
-      html += "<h2>No files found</h2";
+      html += "<h2>No files found</h2>";
     }
     html += "</body></html>";
     response.write(html);
