@@ -1,4 +1,6 @@
 var fs = require("fs");
+var mime = require("mime");
+var path = require("path");
 
 function home(response, data) {
   fs.readFile("views/home.html", function (err, data) {
@@ -11,6 +13,16 @@ function home(response, data) {
 }
 
 function show(response, data) {
+  if (data.fields && data.fields["fn"]) {
+    var name = data.fields["fn"];
+    var file = path.join(__dirname, "/files", name);
+    var mimeType = mime.lookup(file);
+    response.setHeader("Content-disposition", "attachement; filename=" + name);
+    response.setHeader("Content-type", mimeType);
+    var fielddata = fs.readFileSync(file, "binary");
+    response.end(fielddata, "binary");
+    return true;
+  }
   fs.readdir("files", function (err, list) {
     response.writeHead(200, { "Content-Type": "text/html" });
     var html = "<html><head></head>" + "<body><h1>File Manager</h1>";
