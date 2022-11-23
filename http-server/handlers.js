@@ -17,7 +17,7 @@ function show(response, data) {
     var name = data.fields["fn"];
     var file = path.join(__dirname, "/files", name);
     var mimeType = mime.lookup(file);
-    response.setHeader("Content-disposition", "attachement; filename=" + name);
+    response.setHeader("Content-disposition", "attachment; filename=" + name);
     response.setHeader("Content-type", mimeType);
     var filedata = fs.readFileSync(file, "binary");
     response.end(filedata, "binary");
