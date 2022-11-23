@@ -6,8 +6,8 @@
         <h1>File Manager</h1>
         <a href="/show">Show all Files</a>
 
-        <form action="/upload" method="post">
-            <input type="file" />
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="fn"/>
             <input type="submit" value="Upload file" />
         </form>
     </body>

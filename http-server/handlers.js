@@ -44,10 +44,33 @@ function show(response, data) {
 }
 
 function upload(response, data) {
-  response.writeHead(200, { "Content-Type": "text/plain" });
-  response.write("Request 'upload' called.");
-  response.end();
+  var temp = data.files["fn"].filepath;
+  var name = data.files["fn"].originalFilename;
+  copyFile(temp, path.join("./files", name), function (err) {
+    if (err) {
+      console.log(err);
+      return false;
+    } else {
+      return show(response, data);
+    }
+  });
+
   return true;
+}
+
+function copyFile(source, target, callback) {
+  var rd = fs.createReadStream(source);
+  rd.on("error", function (err) {
+    callback(err);
+  });
+  var wr = fs.createWriteStream(target);
+  wr.on("error", function (err) {
+    callback(err);
+  });
+  wr.on("finish", function () {
+    callback();
+  });
+  rd.pipe(wr);
 }
 
 exports.home = home;
