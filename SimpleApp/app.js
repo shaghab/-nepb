@@ -15,6 +15,20 @@ adminRouter.get("/article", function (req, res) {
   res.send("show all articles!");
 });
 
+adminRouter.param("id", function (req, res, next, name) {
+  console.log("Validating id ", id);
+  var id = Number(req.params.id);
+  if (!id) {
+  } else {
+    req.id = id;
+    next();
+  }
+});
+
+adminRouter.get("/users/:id", function (req, res) {
+  res.send("ID: " + req.id + "!");
+});
+
 app.use("/admin", adminRouter);
 
 app.get("/", function (req, res) {
