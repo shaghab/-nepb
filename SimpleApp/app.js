@@ -1,5 +1,6 @@
 let express = require("express");
 let app = express();
+app.set("view engine", "pug");
 
 var adminRouter = express.Router();
 
@@ -32,7 +33,9 @@ adminRouter.get("/users/:id", function (req, res) {
 app.use("/admin", adminRouter);
 
 app.get("/", function (req, res) {
-  res.send("Hallo Express!");
+  res.render("index", {
+    title: "Hello Pug!",
+  });
 });
 
 let server = app.listen(3000, function () {
