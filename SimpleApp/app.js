@@ -33,7 +33,7 @@ adminRouter.get("/users/:id", function (req, res) {
 app.use("/admin", adminRouter);
 
 app.get("/", function (req, res) {
-  res.render("index", {
+  res.render("content", {
     title: "Hello Pug!",
   });
 });
