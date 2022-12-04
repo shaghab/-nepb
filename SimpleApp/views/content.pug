@@ -2,4 +2,7 @@ extends index
 
 block content
   h1= title
+  ul
+    each val, index in {1: "Islamabad", 2: "Karachi", 3: "Lahore"}
+      li= index+ ":" + val
   a(href="http://www.joergkrause.de/") Jörg &lt;Is A Geek&gt; Krause
