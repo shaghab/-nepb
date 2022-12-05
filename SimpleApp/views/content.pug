@@ -1,8 +1,16 @@
 extends index
 
+mixin list(id, ...items)
+  ul(id=id)
+    each item in items 
+      li= item
+
 block content
   h1= title
   ul
     each val, index in {1: "Islamabad", 2: "Karachi", 3: "Lahore"}
       li= index+ ":" + val
+  +list('my-list', 1, 2, 3, 4)
   a(href="http://www.joergkrause.de/") Jörg &lt;Is A Geek&gt; Krause
+
+   
