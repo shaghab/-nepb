@@ -8,7 +8,15 @@ admin.get("/", function (req, res) {
   res.send("Admin Homepage");
 });
 
-app.use("/admin", admin);
+var secret = express();
+secret.get("/", function (req, res) {
+  console.log(secret.mountpath);
+  res.send("Admin Secret");
+});
+
+admin.use("/secret", secret);
+
+app.use(["/adm*n", "/manager"], admin);
 
 let server = app.listen(3000, function () {
   let host = server.address().address;
