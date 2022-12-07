@@ -8,6 +8,11 @@ admin.get("/", function (req, res) {
   res.send("Admin Homepage");
 });
 
+admin.on("mount", function (parent) {
+  console.log("Admin mounted");
+  //console.log(parent);
+});
+
 var secret = express();
 secret.get("/", function (req, res) {
   console.log(secret.mountpath);
