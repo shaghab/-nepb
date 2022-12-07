@@ -23,6 +23,21 @@ admin.use("/secret", secret);
 
 app.use(["/adm*n", "/manager"], admin);
 
+app.param("id", function (req, res, next, id) {
+  console.log("Called once", id);
+  next();
+});
+
+app.get("/user/:id", function (req, res, next) {
+  console.log("Will be reached");
+  next();
+});
+
+app.get("/user/:id", function (req, res) {
+  console.log("And this too");
+  res.end();
+});
+
 let server = app.listen(3000, function () {
   let host = server.address().address;
   let port = server.address().port;
