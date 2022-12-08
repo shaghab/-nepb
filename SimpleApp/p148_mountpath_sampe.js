@@ -28,6 +28,11 @@ app.use("/admin", function (req, res, next) {
   next();
 });
 
+app.use(function (req, res, next) {
+  console.log("Time: %d", Date.now());
+  next();
+});
+
 app.use(["/adm*n", "/manager"], admin);
 
 app.param("id", function (req, res, next, id) {
