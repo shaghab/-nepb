@@ -21,6 +21,13 @@ secret.get("/", function (req, res) {
 
 admin.use("/secret", secret);
 
+app.use("/admin", function (req, res, next) {
+  console.log("originalUrl ", req.originalUrl);
+  console.log("baseUrl ", req.baseUrl);
+  console.log("path ", req.path);
+  next();
+});
+
 app.use(["/adm*n", "/manager"], admin);
 
 app.param("id", function (req, res, next, id) {
