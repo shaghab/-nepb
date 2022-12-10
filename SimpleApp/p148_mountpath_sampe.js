@@ -1,3 +1,4 @@
+const { response } = require("express");
 var express = require("express");
 
 var app = express();
@@ -5,7 +6,17 @@ var admin = express();
 
 admin.get("/", function (req, res) {
   console.log(admin.mountpath);
-  res.send("Admin Homepage");
+  res.format({
+    text: function () {
+      res.send("Admin Homepage");
+    },
+    html: function () {
+      res.send("<p>Admin Homepage</p>");
+    },
+    json: function () {
+      res.send({ message: "Admin Homepage" });
+    },
+  });
 });
 
 admin.on("mount", function (parent) {
